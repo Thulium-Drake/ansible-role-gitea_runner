@@ -1,0 +1,32 @@
+# {{ ansible_managed }}
+log:
+  level: info
+
+runner:
+  file: .runner
+  capacity: {{ gitea_runner_capacity }}
+  env_file: .env
+  timeout: 3h
+  insecure: {{ not gitea_runner_verify_ssl }}
+  fetch_timeout: 5s
+  fetch_interval: 2s
+  labels: {{ gitea_runner_labels }}
+
+cache:
+  enabled: true
+  dir: "/data/cache"
+  host: ""
+  port: 0
+  external_server: ""
+
+container:
+  network: ""
+  privileged: false
+  options: "-v /run/podman/podman.sock:/var/run/docker.sock"  # Propagate podman socket from host to job container
+  workdir_parent:
+  valid_volumes:
+    - /run/podman/podman.sock
+  docker_host: "-"
+
+host:
+  workdir_parent:

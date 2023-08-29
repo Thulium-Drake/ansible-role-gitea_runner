@@ -1,0 +1,26 @@
+---
+# URL of the Gitea instance to use
+gitea_runner_instance_url: https://gitea.example.com
+# Whether or not to validate SSL certificates for the Gitea instance
+# NOTE: if using a custom CA, you probably want this
+gitea_runner_verify_ssl: true
+
+# Registration token to add Runner to Gitea instance
+gitea_runner_registration_token: 'my-gitea-token'
+
+# Which image version to run
+gitea_runner_version: 'latest'
+
+# How much jobs the runner can execute at the same time
+gitea_runner_capacity: 1
+
+gitea_runner_name: "{{ ansible_facts['fqdn'] }}"
+
+# Which labels the runner has
+# NOTE: Basically which images are available to execute jobs with
+# The one below has been used succesfully to test Ansible roles with Molecule
+gitea_runner_labels:
+  - ubuntu-latest:docker://ghcr.io/catthehacker/ubuntu:act-latest
+
+# Where to store all data related to Gitea Runner
+gitea_runner_dir: '/opt/gitea_runner'

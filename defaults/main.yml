@@ -2,8 +2,11 @@
 # URL of the Gitea instance to use
 gitea_runner_instance_url: https://gitea.example.com
 # Whether or not to validate SSL certificates for the Gitea instance
-# NOTE: if using a custom CA, you probably want this
+# NOTE: if using a selfsigned certificate, you probably want this
 gitea_runner_verify_ssl: true
+
+# CA certificate bundle
+gitea_runner_ca_file: '/etc/ssl/certs/ca-certificates.crt'
 
 # Registration token to add Runner to Gitea instance
 gitea_runner_registration_token: 'my-gitea-token'

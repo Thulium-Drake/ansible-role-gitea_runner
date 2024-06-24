@@ -14,6 +14,9 @@ gitea_runner_registration_token: 'my-gitea-token'
 # Which image version to run
 gitea_runner_version: 'latest'
 
+# Whether or not to allow Gitea runner privileges
+gitea_runner_privileged: false
+
 # How much jobs the runner can execute at the same time
 gitea_runner_capacity: 1
 

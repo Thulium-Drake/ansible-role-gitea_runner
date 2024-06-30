@@ -27,7 +27,7 @@
       - "{{ gitea_runner_dir }}/data:/data"
       - "{{ gitea_runner_dir }}/config.yaml:/config.yaml"
       - '/run/podman/podman.sock:/var/run/docker.sock'
-      - '/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro'
+      - "{{ gitea_runner_ca_file }}:/etc/ssl/certs/ca-certificates.crt:ro"
     env:
       GITEA_INSTANCE_URL: "{{ gitea_runner_instance_url }}"
       GITEA_RUNNER_REGISTRATION_TOKEN: "{{ gitea_runner_registration_token }}"

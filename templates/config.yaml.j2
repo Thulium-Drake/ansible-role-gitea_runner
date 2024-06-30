@@ -22,7 +22,7 @@ cache:
 container:
   network: ""
   privileged: {{ gitea_runner_privileged }}
-  options: "-v /run/podman/podman.sock:/var/run/docker.sock -v {{ gitea_runner_ca_file }}:/etc/ssl/certs/ca-certificates.crt:ro"  # Propagate podman socket from host to job container
+  options: "-v /run/podman/podman.sock:/var/run/docker.sock -v {{ gitea_runner_ca_file }}:/etc/ssl/certs/ca-certificates.crt:ro,z"  # Propagate podman socket from host to job container
   workdir_parent:
   valid_volumes:
     - /run/podman/podman.sock

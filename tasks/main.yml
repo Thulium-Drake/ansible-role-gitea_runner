@@ -22,12 +22,12 @@
     image: "gitea/act_runner:{{ gitea_runner_version }}"
     state: 'present'
     auto_remove: true
-    privileged: true
+    privileged: "{{ gitea_runner_privileged }}"
     volumes:
       - "{{ gitea_runner_dir }}/data:/data"
       - "{{ gitea_runner_dir }}/config.yaml:/config.yaml"
-      - '/run/podman/podman.sock:/var/run/docker.sock'
-      - "{{ gitea_runner_ca_file }}:/etc/ssl/certs/ca-certificates.crt:ro"
+      - '/run/podman/podman.sock:/var/run/docker.sock:z'
+      - "{{ gitea_runner_ca_file }}:/etc/ssl/certs/ca-certificates.crt:ro,z"
     env:
       GITEA_INSTANCE_URL: "{{ gitea_runner_instance_url }}"
       GITEA_RUNNER_REGISTRATION_TOKEN: "{{ gitea_runner_registration_token }}"

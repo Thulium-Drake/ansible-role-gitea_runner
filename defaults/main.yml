@@ -1,11 +1,15 @@
 ---
 # URL of the Gitea instance to use
-gitea_runner_instance_url: https://gitea.example.com
+gitea_runner_instance_url: 'https://gitea.example.com'
 # Whether or not to validate SSL certificates for the Gitea instance
 # NOTE: if using a selfsigned certificate, you probably want this
 gitea_runner_verify_ssl: true
 
 # CA certificate bundle
+# It's mapped to both /etc/ssl/certs/custom-ca.pem and /etc/pki/ca-trust/source/anchors/custom-ca.pem
+# in containers (so both EL and Debian-like are supported)
+#
+# However, EL-like containers _must_ run update-ca-trust before doing anything else
 gitea_runner_ca_file: '/etc/ssl/certs/ca-certificates.crt'
 
 # Registration token to add Runner to Gitea instance

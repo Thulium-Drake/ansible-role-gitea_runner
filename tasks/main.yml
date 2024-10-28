@@ -43,6 +43,7 @@
       CONFIG_FILE: '/config.yaml'
       http_proxy: "{{ gitea_runner_proxy_url }}"
       https_proxy: "{{ gitea_runner_proxy_url }}"
+      no_proxy: "{{ gitea_runner_no_proxy }}"
   notify: 'Restart gitea-runner'
 
 - name: 'Ensure service'

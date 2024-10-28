@@ -37,3 +37,4 @@ gitea_runner_dir: '/opt/gitea_runner'
 
 # Proxy configuration
 gitea_runner_proxy_url: ''
+gitea_runner_no_proxy: ''

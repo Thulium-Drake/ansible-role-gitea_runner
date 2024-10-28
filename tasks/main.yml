@@ -51,3 +51,10 @@
     name: 'gitea-runner.service'
     state: 'started'
     daemon_reload: true
+
+- name: 'Ensure cleanup cronjob'
+  ansible.builtin.cron:
+    name: 'gitea_runner - clean up old images'
+    user: 'root'
+    job: "podman system prune -af --filter \"until={{ gitea_runner_prune_images_older_then }}h\""
+    special_time: 'daily'

@@ -26,6 +26,10 @@ gitea_runner_capacity: 1
 
 gitea_runner_name: "{{ ansible_facts['fqdn'] }}"
 
+# Daily scheduled cleanup of downloaded images
+# Cleans up images older then X hours
+gitea_runner_prune_images_older_then: '48'
+
 # Which labels the runner has
 # NOTE: Basically which images are available to execute jobs with
 # The one below has been used succesfully to test Ansible roles with Molecule

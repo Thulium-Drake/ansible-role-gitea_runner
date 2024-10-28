@@ -28,26 +28,22 @@
       - "{{ gitea_runner_dir }}/config.yaml:/config.yaml"
       - '/run/podman/podman.sock:/var/run/docker.sock:z'
       - "{{ gitea_runner_ca_file }}:/etc/ssl/certs/ca-certificates.crt:ro,z"
+    generate_systemd:
+      path: '/etc/systemd/system'
+      restart_policy: 'always'
+      time: 120
+      names: true
+      new: true
+      container_prefix: ''
+      separator: ''
     env:
       GITEA_INSTANCE_URL: "{{ gitea_runner_instance_url }}"
       GITEA_RUNNER_REGISTRATION_TOKEN: "{{ gitea_runner_registration_token }}"
       GITEA_RUNNER_NAME: "{{ gitea_runner_name }}"
       CONFIG_FILE: '/config.yaml'
+      http_proxy: "{{ gitea_runner_proxy_url }}"
+      https_proxy: "{{ gitea_runner_proxy_url }}"
   notify: 'Restart gitea-runner'
-
-- name: 'Generate systemd service'
-  ansible.builtin.command: podman generate systemd --no-header --new -n gitea_runner
-  register: 'gitea_runner_podman_service'
-  changed_when: false  # This task only generates input for the task below
-
-- name: 'Copy service file into place'
-  ansible.builtin.copy:
-    content: "{{ gitea_runner_podman_service['stdout'] }}"
-    dest: '/etc/systemd/system/gitea-runner.service'
-    remote_src: true
-    owner: 'root'
-    group: 'root'
-    mode: '0644'
 
 - name: 'Ensure service'
   ansible.builtin.systemd:

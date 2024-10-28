@@ -34,3 +34,6 @@ gitea_runner_labels:
 
 # Where to store all data related to Gitea Runner
 gitea_runner_dir: '/opt/gitea_runner'
+
+# Proxy configuration
+gitea_runner_proxy_url: ''

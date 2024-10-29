@@ -1,5 +1,5 @@
 ---
-- name: 'Restart gitea-runner'
+- name: 'Restart gitea_runner'
   ansible.builtin.service:
-    name: 'gitea-runner'
+    name: 'gitea_runner'
     state: 'restarted'

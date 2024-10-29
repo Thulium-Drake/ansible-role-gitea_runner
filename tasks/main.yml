@@ -14,7 +14,7 @@
     owner: 'root'
     group: 'root'
     mode: '0640'
-  notify: 'Restart gitea-runner'
+  notify: 'Restart gitea_runner'
 
 - name: 'Ensure Podman container'
   containers.podman.podman_container:
@@ -44,11 +44,11 @@
       http_proxy: "{{ gitea_runner_proxy_url }}"
       https_proxy: "{{ gitea_runner_proxy_url }}"
       no_proxy: "{{ gitea_runner_no_proxy }}"
-  notify: 'Restart gitea-runner'
+  notify: 'Restart gitea_runner'
 
 - name: 'Ensure service'
   ansible.builtin.systemd:
-    name: 'gitea-runner.service'
+    name: 'gitea_runner.service'
     state: 'started'
     daemon_reload: true
 

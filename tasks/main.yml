@@ -20,7 +20,7 @@
   containers.podman.podman_container:
     name: 'gitea_runner'
     image: "gitea/act_runner:{{ gitea_runner_version }}"
-    state: 'present'
+    state: 'quadlet'
     auto_remove: true
     privileged: "{{ gitea_runner_privileged }}"
     volumes:
@@ -28,14 +28,11 @@
       - "{{ gitea_runner_dir }}/config.yaml:/config.yaml"
       - '/run/podman/podman.sock:/var/run/docker.sock:z'
       - "{{ gitea_runner_ca_file }}:/etc/ssl/certs/ca-certificates.crt:ro,z"
-    generate_systemd:
-      path: '/etc/systemd/system'
-      restart_policy: 'always'
-      time: 120
-      names: true
-      new: true
-      container_prefix: ''
-      separator: ''
+    quadlet_options:
+      - 'AutoUpdate=registry'
+      - |
+        [Install]
+        WantedBy=default.target
     env:
       GITEA_INSTANCE_URL: "{{ gitea_runner_instance_url }}"
       GITEA_RUNNER_REGISTRATION_TOKEN: "{{ gitea_runner_registration_token }}"
